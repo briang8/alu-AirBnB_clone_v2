@@ -44,7 +44,7 @@ class DBStorage:
             objs.extend(self.__session.query(Review).all())
             objs.extend(self.__session.query(Amenity).all())
         else:
-            if type(cls) is str:
+            if isinstance(cls, str):
                 cls = eval(cls)
             objs = self.__session.query(cls)
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
@@ -77,7 +77,7 @@ class DBStorage:
         """Retrieve one object based on class name and ID."""
         if cls is None or id is None:
             return None
-        if type(cls) is str:
+        if isinstance(cls, str):
             cls = eval(cls)
         return self.__session.query(cls).filter(cls.id == id).first()
 
@@ -92,6 +92,6 @@ class DBStorage:
             total += self.__session.query(Review).count()
             total += self.__session.query(Amenity).count()
             return total
-        if type(cls) is str:
+        if isinstance(cls, str):
             cls = eval(cls)
         return self.__session.query(cls).count()

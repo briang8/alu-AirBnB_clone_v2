@@ -14,9 +14,9 @@ class FileStorage:
         if cls is not None:
             cls_dic = {}
             for key, obj in obj_dict.items():
-                if type(cls) is str:
+                if isinstance(cls, str):
                     cls = eval(cls)
-                if (type(obj) is cls):
+                if (isinstance(obj, cls)):
                     cls_dic[key] = obj
             return cls_dic
         return obj_dict
